@@ -2,7 +2,7 @@ package com.cecd.help.core.util;
 
 import com.cecd.help.core.constant.Constants;
 import com.cecd.help.core.security.JwtDto;
-import com.cecd.help.domain.entity.user.type.EUserRole;
+import com.cecd.help.user.domain.type.EUserRole;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;

@@ -4,7 +4,7 @@ import com.cecd.help.core.exception.CustomException;
 import com.cecd.help.core.exception.ErrorCode;
 import com.cecd.help.core.security.info.UserPrincipal;
 import com.cecd.help.user.domain.entity.User;
-import com.cecd.help.user.infrastructure.repository.UserRepositoryImpl;
+import com.cecd.help.user.infrastructure.jpa.UserJpaRepository;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CustomUserDetailService implements UserDetailsService {
-    private final UserRepositoryImpl userRepositoryImpl;
+    private final UserJpaRepository userRepositoryImpl;
 
     @Override
     public UserDetails loadUserByUsername(String username) {

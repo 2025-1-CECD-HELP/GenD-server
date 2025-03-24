@@ -40,8 +40,9 @@ public class User {
     @Column(name = "nickname", length = 20)
     private String nickname;
 
-    @Column(name = "goal_distance")
-    private Double goalDistance;
+    @Column(name =  "loginId")
+    private String loginId;
+
 
     @Column(name = "user_role", nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
@@ -60,16 +61,8 @@ public class User {
     @Column(name = "fcm_token")
     private String fcmToken;
 
-    @Column(name = "credit")
-    @ColumnDefault("0")
-    private Integer credit;
-
     @Column(name = "created_at")
     private LocalDateTime createdAt;
-
-    @Column(name = "reports_cnt")
-    @ColumnDefault("0")
-    private Integer reportsCnt;
 
     //--------------------------------------------------
 
@@ -77,38 +70,13 @@ public class User {
     public User(String socialId, String nickname, EUserRole userRole, ELoginProvider provider, String fcmToken) {
         this.socialId = socialId;
         this.nickname = nickname;
-        this.goalDistance = 0.0;
         this.userRole = userRole;
         this.provider = provider;
         this.fcmToken = fcmToken;
         this.profileImageUrl = null;
         this.refreshToken = null;
-        this.credit = 0;
         this.createdAt = LocalDateTime.now();
-        this.reportsCnt = 0;
     }
 
-    public static User toUserEntity(String socialId, String nickname, EUserRole userRole, ELoginProvider provider,
-                                    String fcmToken) {
-        return User.builder()
-                .socialId(socialId)
-                .nickname(nickname)
-                .userRole(userRole)
-                .provider(provider)
-                .fcmToken(fcmToken)
-                .build();
-    }
-
-    public void updateGoal(Double goalDistance) {
-        this.goalDistance = goalDistance;
-    }
-
-
-    public void updateFcmToken(String fcmToken) {
-        this.fcmToken = fcmToken;
-    }
-
-    public void updateReportCnt() {
-        this.reportsCnt += 1;
-    }
 }
+

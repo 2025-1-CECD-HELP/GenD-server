@@ -1,10 +1,8 @@
 package com.cecd.help.core.util;
 
-import com.cecd.help.application.dto.oauth.ApplePublicKeyListDto;
-import com.cecd.help.application.dto.oauth.OAuth2UserInfoResponseDto;
-import com.cecd.help.application.service.oauth.AppleJwtParser;
-import com.cecd.help.application.service.oauth.ApplePublicKeyGenerator;
+
 import com.cecd.help.core.constant.Constants;
+import com.cecd.help.user.application.dto.OAuth2UserInfoResponseDto;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import io.jsonwebtoken.Claims;
@@ -24,9 +22,7 @@ import org.springframework.web.client.RestTemplate;
 public class OAuth2Util {
     private final RestClient restClient;
 
-    public OAuth2Util(AppleJwtParser appleJwtParser, ApplePublicKeyGenerator applePublicKeyGenerator) {
-        this.appleJwtParser = appleJwtParser;
-        this.applePublicKeyGenerator = applePublicKeyGenerator;
+    public OAuth2Util() {
         this.restClient = RestClient.builder().build();
     }
 
@@ -58,21 +54,6 @@ public class OAuth2Util {
         }
     }
 
-    private final RestTemplate restTemplate = new RestTemplate();
-    private final AppleJwtParser appleJwtParser;
-    private final ApplePublicKeyGenerator applePublicKeyGenerator;
 
-    public OAuth2UserInfoResponseDto getAppleUserInfo(String appleIdToken) {
-        Map<String, String> headers = appleJwtParser.parseHeaders(appleIdToken);
-        ResponseEntity<ApplePublicKeyListDto> applePublicKeys = restTemplate.getForEntity(
-                Constants.APPLE_PUBLIC_KEYS_URL,
-                ApplePublicKeyListDto.class
-        );
-        PublicKey publicKey = applePublicKeyGenerator.generatePublicKey(headers, applePublicKeys.getBody());
-        Claims claims = appleJwtParser.parseClaims(appleIdToken, publicKey);
-        return OAuth2UserInfoResponseDto.of(
-                claims.get("sub", String.class)
-        );
-    }
 }
 
