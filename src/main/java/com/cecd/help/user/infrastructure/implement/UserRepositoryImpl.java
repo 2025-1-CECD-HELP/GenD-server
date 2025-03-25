@@ -5,7 +5,7 @@ import com.cecd.help.core.exception.ErrorCode;
 import com.cecd.help.user.domain.entity.User;
 import com.cecd.help.user.infrastructure.jpa.UserJpaRepository;
 import com.cecd.help.user.infrastructure.repository.UserRepository;
-import java.util.Optional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +17,12 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public User findByLoginId(String loginId) {
         return userJpaRepository.findByLoginId(loginId)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+    }
+
+    @Override
+    public User findById(UUID id) {
+        return userJpaRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
     }
 

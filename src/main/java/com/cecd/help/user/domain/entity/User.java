@@ -61,6 +61,9 @@ public class User {
     @Column(name = "fcm_token")
     private String fcmToken;
 
+    @Column(name = "email")
+    private String email;
+
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
