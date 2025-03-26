@@ -5,6 +5,7 @@ import lombok.Builder;
 
 @Builder
 public record ReadWorkspaceResponseDto(
+        Long workspaceId,
         String workspaceName,
         String workspaceDescription,
         String imageUrl,

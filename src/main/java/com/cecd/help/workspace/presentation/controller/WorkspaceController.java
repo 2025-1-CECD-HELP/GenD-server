@@ -2,8 +2,10 @@ package com.cecd.help.workspace.presentation.controller;
 
 import com.cecd.help.core.annotation.UserId;
 import com.cecd.help.core.common.CommonResponseDto;
+import com.cecd.help.workspace.application.dto.ReadWorkspaceListResponseDto;
 import com.cecd.help.workspace.application.usecase.CreateWorkspaceUseCase;
 import com.cecd.help.workspace.application.usecase.DeleteWorkspaceUseCase;
+import com.cecd.help.workspace.application.usecase.ReadWorkspaceListUseCase;
 import com.cecd.help.workspace.application.usecase.ReadWorkspaceUseCase;
 import com.cecd.help.workspace.application.usecase.UpdateWorkspaceUseCase;
 import com.cecd.help.workspace.presentation.request.CreateWorkspaceRequestDto;
@@ -27,6 +29,7 @@ public class WorkspaceController {
     private final ReadWorkspaceUseCase readWorkspaceUseCase;
     private final UpdateWorkspaceUseCase updateWorkspaceUsecase;
     private final DeleteWorkspaceUseCase deleteWorkspaceUseCase;
+    private final ReadWorkspaceListUseCase readWorkspaceListUseCase;
 
     @PostMapping("")
     public CommonResponseDto<?> create(
@@ -35,6 +38,13 @@ public class WorkspaceController {
     ) {
         createWorkspaceUseCase.execute(workspaceRequestDto, userId);
         return CommonResponseDto.created(null);
+    }
+
+    @GetMapping("")
+    public CommonResponseDto<?> getWorkspaceList(
+            @UserId UUID userId
+    ) {
+        return CommonResponseDto.ok(readWorkspaceListUseCase.execute(userId));
     }
 
     @GetMapping("/{workspaceId}")

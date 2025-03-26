@@ -15,4 +15,6 @@ public interface MemberRepository {
 
     boolean existsByUserAndWorkspaceAndWorkspaceRole(User user, Workspace workspace, WorkspaceRole workspaceRole);
 
+    List<Member> findAllByUser(User user);
+
 }
