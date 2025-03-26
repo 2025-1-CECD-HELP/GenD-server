@@ -41,7 +41,7 @@ public class Workspace {
 
     //------------------------------------------------
 
-    @OneToMany(mappedBy = "workspace", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL)
     private List<Member> member;
 
     @Builder

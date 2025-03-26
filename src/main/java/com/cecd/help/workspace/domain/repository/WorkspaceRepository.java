@@ -7,4 +7,6 @@ public interface WorkspaceRepository {
     void save(Workspace workspace);
 
     Workspace findById(Long id);
+
+    void delete(Workspace workspace);
 }

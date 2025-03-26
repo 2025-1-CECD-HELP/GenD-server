@@ -23,4 +23,9 @@ public class WorkspaceRepositoryImpl implements WorkspaceRepository {
         return workspaceJpaRepository.findById(id)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
     }
+
+    @Override
+    public void delete(Workspace workspace) {
+        workspaceJpaRepository.delete(workspace);
+    }
 }
