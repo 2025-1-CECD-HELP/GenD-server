@@ -9,7 +9,7 @@ import com.cecd.help.workspace.domain.entity.Member;
 import com.cecd.help.workspace.domain.entity.Workspace;
 import com.cecd.help.workspace.domain.repository.MemberRepository;
 import com.cecd.help.workspace.domain.repository.WorkspaceRepository;
-import com.cecd.help.workspace.domain.type.EWorkspaceRole;
+import com.cecd.help.workspace.domain.type.WorkspaceRole;
 import com.cecd.help.workspace.presentation.request.CreateWorkspaceRequestDto;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +41,7 @@ public class CreateWorkspaceService implements CreateWorkspaceUseCase {
         workspaceRepository.save(workspace);
 
         Member adminMember = memberMapper.toEntity(
-                EWorkspaceRole.Admin,
+                WorkspaceRole.eAdmin,
                 user,
                 workspace
         );
@@ -51,7 +51,7 @@ public class CreateWorkspaceService implements CreateWorkspaceUseCase {
                 .toList();
 
         List<Member> members = inviteUsers.stream()
-                .map(inviteUser -> memberMapper.toEntity(EWorkspaceRole.Member, inviteUser, workspace))
+                .map(inviteUser -> memberMapper.toEntity(WorkspaceRole.eMember, inviteUser, workspace))
                 .toList();
 
         List<Member> allMembers = new ArrayList<>();

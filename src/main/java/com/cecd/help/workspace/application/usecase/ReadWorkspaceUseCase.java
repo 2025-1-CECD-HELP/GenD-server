@@ -6,5 +6,5 @@ import java.util.UUID;
 
 @UseCase
 public interface ReadWorkspaceUseCase {
-    ReadWorkspaceResponseDto readWorkspace(Long workspaceId, UUID userId);
+    ReadWorkspaceResponseDto execute(Long workspaceId, UUID userId);
 }

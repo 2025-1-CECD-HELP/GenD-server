@@ -24,7 +24,7 @@ public class ReadWorkspaceService implements ReadWorkspaceUseCase {
     private final WorkspaceMapper workspaceMapper;
 
     @Override
-    public ReadWorkspaceResponseDto readWorkspace(Long workspaceId, UUID userId) {
+    public ReadWorkspaceResponseDto execute(Long workspaceId, UUID userId) {
         User user = userRepository.findById(userId);
 
         Workspace workspace = workspaceRepository.findById(workspaceId);
@@ -35,7 +35,7 @@ public class ReadWorkspaceService implements ReadWorkspaceUseCase {
                 .workspaceName(workspace.getWorkspaceName())
                 .workspaceDescription(workspace.getWorkspaceDescription())
                 .imageUrl(workspace.getWorkspaceImageUrl())
-                .eWorkspaceRole(member.getEWorkspaceRole())
+                .workspaceRole(member.getWorkspaceRole())
                 .build();
 
     }

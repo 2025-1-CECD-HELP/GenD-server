@@ -53,9 +53,9 @@ public class Workspace {
 
     }
 
-    public void addMember(Member member) {
-        this.member.add(member);
-
-
+    public void updateWorkspace(String workspaceName, String workspaceDescription, String workspaceImageUrl) {
+        this.workspaceName = workspaceName;
+        this.workspaceDescription = workspaceDescription;
+        this.workspaceImageUrl = workspaceImageUrl;
     }
 }

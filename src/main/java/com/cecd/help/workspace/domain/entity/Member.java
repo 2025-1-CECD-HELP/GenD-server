@@ -1,8 +1,7 @@
 package com.cecd.help.workspace.domain.entity;
 
 import com.cecd.help.user.domain.entity.User;
-import com.cecd.help.workspace.domain.type.EWorkspaceRole;
-import jakarta.persistence.CascadeType;
+import com.cecd.help.workspace.domain.type.WorkspaceRole;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,9 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -32,9 +29,9 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "workspace_role")
     @Enumerated(EnumType.STRING)
-    private EWorkspaceRole eWorkspaceRole;
+    private WorkspaceRole workspaceRole;
 
     //------------------------------------------------
 
@@ -49,8 +46,8 @@ public class Member {
     //------------------------------------------------
 
     @Builder
-    public Member(EWorkspaceRole eWorkspaceRole, User user, Workspace workspace) {
-        this.eWorkspaceRole = eWorkspaceRole;
+    public Member(WorkspaceRole workspaceRole, User user, Workspace workspace) {
+        this.workspaceRole = workspaceRole;
         this.user = user;
         this.workspace = workspace;
     }
