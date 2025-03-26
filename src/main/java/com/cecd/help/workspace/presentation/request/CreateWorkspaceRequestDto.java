@@ -6,6 +6,6 @@ public record CreateWorkspaceRequestDto(
         String workspaceName,
         String workspaceDescription,
         String workspaceImageUrl,
-        List<InviteEmail> inviteEmails
+        List<InviteEmail> inviteEmailList
 ) {
 }

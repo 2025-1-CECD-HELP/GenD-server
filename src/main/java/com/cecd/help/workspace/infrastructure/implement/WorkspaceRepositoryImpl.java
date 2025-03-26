@@ -1,5 +1,7 @@
 package com.cecd.help.workspace.infrastructure.implement;
 
+import com.cecd.help.core.exception.CustomException;
+import com.cecd.help.core.exception.ErrorCode;
 import com.cecd.help.workspace.domain.entity.Workspace;
 import com.cecd.help.workspace.domain.repository.WorkspaceRepository;
 import com.cecd.help.workspace.infrastructure.jpa.WorkspaceJpaRepository;
@@ -14,5 +16,11 @@ public class WorkspaceRepositoryImpl implements WorkspaceRepository {
     @Override
     public void save(Workspace workspace) {
         workspaceJpaRepository.save(workspace);
+    }
+
+    @Override
+    public Workspace findById(Long id) {
+        return workspaceJpaRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
     }
 }

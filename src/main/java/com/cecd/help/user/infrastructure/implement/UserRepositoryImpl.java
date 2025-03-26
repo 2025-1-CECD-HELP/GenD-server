@@ -4,7 +4,7 @@ import com.cecd.help.core.exception.CustomException;
 import com.cecd.help.core.exception.ErrorCode;
 import com.cecd.help.user.domain.entity.User;
 import com.cecd.help.user.infrastructure.jpa.UserJpaRepository;
-import com.cecd.help.user.infrastructure.repository.UserRepository;
+import com.cecd.help.user.domain.repository.UserRepository;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;

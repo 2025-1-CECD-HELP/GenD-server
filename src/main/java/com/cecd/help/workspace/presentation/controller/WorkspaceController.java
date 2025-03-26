@@ -3,9 +3,12 @@ package com.cecd.help.workspace.presentation.controller;
 import com.cecd.help.core.annotation.UserId;
 import com.cecd.help.core.common.CommonResponseDto;
 import com.cecd.help.workspace.application.usecase.CreateWorkspaceUseCase;
+import com.cecd.help.workspace.application.usecase.ReadWorkspaceUseCase;
 import com.cecd.help.workspace.presentation.request.CreateWorkspaceRequestDto;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class WorkspaceController {
     private final CreateWorkspaceUseCase createWorkspaceUseCase;
+    private final ReadWorkspaceUseCase readWorkspaceUseCase;
 
     @PostMapping("")
     public CommonResponseDto<?> create(
@@ -24,5 +28,13 @@ public class WorkspaceController {
     ) {
         createWorkspaceUseCase.execute(workspaceRequestDto, userId);
         return CommonResponseDto.created(null);
+    }
+
+    @GetMapping("/{workspaceId}")
+    public CommonResponseDto<?> getWorkspace(
+            @PathVariable Long workspaceId,
+            @UserId UUID userId
+    ) {
+        return CommonResponseDto.ok(readWorkspaceUseCase.readWorkspace(workspaceId, userId));
     }
 }

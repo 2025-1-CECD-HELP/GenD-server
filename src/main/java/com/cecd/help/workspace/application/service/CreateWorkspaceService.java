@@ -1,7 +1,7 @@
 package com.cecd.help.workspace.application.service;
 
 import com.cecd.help.user.domain.entity.User;
-import com.cecd.help.user.infrastructure.repository.UserRepository;
+import com.cecd.help.user.domain.repository.UserRepository;
 import com.cecd.help.workspace.application.mapper.MemberMapper;
 import com.cecd.help.workspace.application.mapper.WorkspaceMapper;
 import com.cecd.help.workspace.application.usecase.CreateWorkspaceUseCase;
@@ -46,7 +46,7 @@ public class CreateWorkspaceService implements CreateWorkspaceUseCase {
                 workspace
         );
 
-        List<User> inviteUsers =  workspaceRequestDto.inviteEmails().stream()
+        List<User> inviteUsers =  workspaceRequestDto.inviteEmailList().stream()
                 .map(inviteEmail -> userRepository.findByLoginId(inviteEmail.email()))
                 .toList();
 

@@ -1,7 +1,6 @@
-package com.cecd.help.user.infrastructure.repository;
+package com.cecd.help.user.domain.repository;
 
 import com.cecd.help.user.domain.entity.User;
-import java.util.Optional;
 import java.util.UUID;
 
 public interface UserRepository {
