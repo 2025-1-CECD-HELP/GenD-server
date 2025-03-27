@@ -38,4 +38,9 @@ public class MemberRepositoryImpl implements MemberRepository {
         return memberJpaRepository.findAllByUser(user);
     }
 
+    @Override
+    public List<Member> findAllByWorkspace(Workspace workspace) {
+        return memberJpaRepository.findAllByWorkspace(workspace);
+    }
+
 }

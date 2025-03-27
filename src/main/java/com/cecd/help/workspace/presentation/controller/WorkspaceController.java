@@ -2,12 +2,11 @@ package com.cecd.help.workspace.presentation.controller;
 
 import com.cecd.help.core.annotation.UserId;
 import com.cecd.help.core.common.CommonResponseDto;
-import com.cecd.help.workspace.application.dto.ReadWorkspaceListResponseDto;
-import com.cecd.help.workspace.application.usecase.CreateWorkspaceUseCase;
-import com.cecd.help.workspace.application.usecase.DeleteWorkspaceUseCase;
-import com.cecd.help.workspace.application.usecase.ReadWorkspaceListUseCase;
-import com.cecd.help.workspace.application.usecase.ReadWorkspaceUseCase;
-import com.cecd.help.workspace.application.usecase.UpdateWorkspaceUseCase;
+import com.cecd.help.workspace.application.usecase.workspace.CreateWorkspaceUseCase;
+import com.cecd.help.workspace.application.usecase.workspace.DeleteWorkspaceUseCase;
+import com.cecd.help.workspace.application.usecase.workspace.ReadWorkspaceListUseCase;
+import com.cecd.help.workspace.application.usecase.workspace.ReadWorkspaceUseCase;
+import com.cecd.help.workspace.application.usecase.workspace.UpdateWorkspaceUseCase;
 import com.cecd.help.workspace.presentation.request.CreateWorkspaceRequestDto;
 import com.cecd.help.workspace.presentation.request.UpdateWorkspaceRequestDto;
 import java.util.UUID;
