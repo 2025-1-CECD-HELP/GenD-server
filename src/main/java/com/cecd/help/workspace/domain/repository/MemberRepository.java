@@ -23,4 +23,6 @@ public interface MemberRepository {
 
     Member findById(Long id);
 
+    void delete(Member member);
+
 }

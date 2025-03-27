@@ -55,4 +55,9 @@ public class MemberRepositoryImpl implements MemberRepository {
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
     }
 
+    @Override
+    public void delete(Member member) {
+        memberJpaRepository.delete(member);
+    }
+
 }
