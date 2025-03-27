@@ -1,4 +1,4 @@
-package com.cecd.help.workspace.application.dto;
+package com.cecd.help.workspace.application.dto.workspace;
 
 import java.util.List;
 import lombok.Builder;

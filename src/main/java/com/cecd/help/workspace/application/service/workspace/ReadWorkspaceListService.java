@@ -1,15 +1,13 @@
-package com.cecd.help.workspace.application.service;
+package com.cecd.help.workspace.application.service.workspace;
 
 import com.cecd.help.user.domain.entity.User;
 import com.cecd.help.user.domain.repository.UserRepository;
-import com.cecd.help.workspace.application.dto.ReadWorkspaceListResponseDto;
-import com.cecd.help.workspace.application.dto.ReadWorkspaceResponseDto;
-import com.cecd.help.workspace.application.usecase.ReadWorkspaceListUseCase;
+import com.cecd.help.workspace.application.dto.workspace.ReadWorkspaceListResponseDto;
+import com.cecd.help.workspace.application.dto.workspace.ReadWorkspaceResponseDto;
+import com.cecd.help.workspace.application.usecase.workspace.ReadWorkspaceListUseCase;
 import com.cecd.help.workspace.domain.entity.Member;
-import com.cecd.help.workspace.domain.entity.Workspace;
 import com.cecd.help.workspace.domain.repository.MemberRepository;
 import com.cecd.help.workspace.domain.repository.WorkspaceRepository;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;

@@ -1,4 +1,4 @@
-package com.cecd.help.workspace.application.dto;
+package com.cecd.help.workspace.application.dto.workspace;
 
 import com.cecd.help.workspace.domain.type.WorkspaceRole;
 import lombok.Builder;

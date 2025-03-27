@@ -1,10 +1,10 @@
-package com.cecd.help.workspace.application.service;
+package com.cecd.help.workspace.application.service.workspace;
 
 import com.cecd.help.user.domain.entity.User;
 import com.cecd.help.user.domain.repository.UserRepository;
 import com.cecd.help.workspace.application.mapper.MemberMapper;
 import com.cecd.help.workspace.application.mapper.WorkspaceMapper;
-import com.cecd.help.workspace.application.usecase.CreateWorkspaceUseCase;
+import com.cecd.help.workspace.application.usecase.workspace.CreateWorkspaceUseCase;
 import com.cecd.help.workspace.domain.entity.Member;
 import com.cecd.help.workspace.domain.entity.Workspace;
 import com.cecd.help.workspace.domain.repository.MemberRepository;

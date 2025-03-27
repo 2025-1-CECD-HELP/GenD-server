@@ -1,10 +1,10 @@
-package com.cecd.help.workspace.application.service;
+package com.cecd.help.workspace.application.service.workspace;
 
 import com.cecd.help.core.exception.CustomException;
 import com.cecd.help.core.exception.ErrorCode;
 import com.cecd.help.user.domain.entity.User;
 import com.cecd.help.user.domain.repository.UserRepository;
-import com.cecd.help.workspace.application.usecase.DeleteWorkspaceUseCase;
+import com.cecd.help.workspace.application.usecase.workspace.DeleteWorkspaceUseCase;
 import com.cecd.help.workspace.domain.entity.Workspace;
 import com.cecd.help.workspace.domain.repository.MemberRepository;
 import com.cecd.help.workspace.domain.repository.WorkspaceRepository;
