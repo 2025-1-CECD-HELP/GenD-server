@@ -19,4 +19,8 @@ public interface MemberRepository {
 
     List<Member> findAllByWorkspace(Workspace workspace);
 
+    Member findByUser(User user);
+
+    Member findById(Long id);
+
 }

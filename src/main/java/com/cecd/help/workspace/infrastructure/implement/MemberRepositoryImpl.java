@@ -43,4 +43,16 @@ public class MemberRepositoryImpl implements MemberRepository {
         return memberJpaRepository.findAllByWorkspace(workspace);
     }
 
+    @Override
+    public Member findByUser(User user) {
+        return memberJpaRepository.findByUser(user)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+    }
+
+    @Override
+    public Member findById(Long id) {
+        return memberJpaRepository.findById(id)
+                .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
+    }
+
 }

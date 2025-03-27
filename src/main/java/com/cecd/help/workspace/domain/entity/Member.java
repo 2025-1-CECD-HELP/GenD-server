@@ -52,4 +52,8 @@ public class Member {
         this.workspace = workspace;
     }
 
+    public void updateRole() {
+        this.workspaceRole = WorkspaceRole.eAdmin;
+    }
+
 }

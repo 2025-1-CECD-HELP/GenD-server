@@ -3,9 +3,11 @@ package com.cecd.help.workspace.presentation.controller;
 import com.cecd.help.core.annotation.UserId;
 import com.cecd.help.core.common.CommonResponseDto;
 import com.cecd.help.workspace.application.usecase.member.ReadMemberUseCase;
+import com.cecd.help.workspace.application.usecase.member.UpdateMemberUseCase;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class MemberController {
     private final ReadMemberUseCase readMemberUseCase;
+    private final UpdateMemberUseCase updateMemberUseCase;
 
     @GetMapping("/{workspaceId}")
     public CommonResponseDto<?> readMembers(
@@ -22,5 +25,14 @@ public class MemberController {
             @PathVariable Long workspaceId
     ) {
         return CommonResponseDto.ok(readMemberUseCase.execute(userId, workspaceId));
+    }
+
+    @PatchMapping("/{memberId}")
+    public CommonResponseDto<?> updateMember(
+            @UserId UUID userId,
+            @PathVariable Long memberId
+    ) {
+        updateMemberUseCase.execute(userId, memberId);
+        return CommonResponseDto.ok(true);
     }
 }

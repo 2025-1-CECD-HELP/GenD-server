@@ -22,4 +22,6 @@ public interface MemberJpaRepository extends JpaRepository<Member, Long> {
     List<Member> findAllByUser(User user);
 
     List<Member> findAllByWorkspace(Workspace workspace);
+
+    Optional<Member> findByUser(User user);
 }
