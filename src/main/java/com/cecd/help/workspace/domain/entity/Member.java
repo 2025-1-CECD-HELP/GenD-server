@@ -29,6 +29,12 @@ public class Member {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false, name = "isSchedule")
+    private Boolean isSchedule;
+
+    @Column(nullable = false, name = "isPost")
+    private Boolean isPost;
+
     @Column(nullable = false, name = "workspace_role")
     @Enumerated(EnumType.STRING)
     private WorkspaceRole workspaceRole;
@@ -50,10 +56,21 @@ public class Member {
         this.workspaceRole = workspaceRole;
         this.user = user;
         this.workspace = workspace;
+        this.isSchedule = true;
+        this.isPost = true;
     }
 
     public void updateRole() {
         this.workspaceRole = WorkspaceRole.eAdmin;
+    }
+
+    public void updateIsAlarm(Boolean isPost, Boolean isSchedule) {
+        this.isPost = isPost;
+        this.isSchedule = isSchedule;
+    }
+
+    public void downRole() {
+        this.workspaceRole = WorkspaceRole.eMember;
     }
 
 }

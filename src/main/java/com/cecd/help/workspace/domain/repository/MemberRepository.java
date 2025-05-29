@@ -19,10 +19,14 @@ public interface MemberRepository {
 
     List<Member> findAllByWorkspace(Workspace workspace);
 
+    List<Member> findAllByWorkspaceAndIsSchedule(Workspace workspace, Boolean isSchedule);
+
     Member findByUser(User user);
 
     Member findById(Long id);
 
     void delete(Member member);
+
+    void save(Member member);
 
 }

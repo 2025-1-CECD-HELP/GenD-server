@@ -18,7 +18,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/api/v1/workspaces")
@@ -26,16 +28,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class WorkspaceController {
     private final CreateWorkspaceUseCase createWorkspaceUseCase;
     private final ReadWorkspaceUseCase readWorkspaceUseCase;
-    private final UpdateWorkspaceUseCase updateWorkspaceUsecase;
+    private final UpdateWorkspaceUseCase updateWorkspaceUseCase;
     private final DeleteWorkspaceUseCase deleteWorkspaceUseCase;
     private final ReadWorkspaceListUseCase readWorkspaceListUseCase;
 
     @PostMapping("")
     public CommonResponseDto<?> create(
-            @RequestBody CreateWorkspaceRequestDto workspaceRequestDto,
+            @RequestPart(name = "image") MultipartFile file,
+            @RequestPart(name = "json") CreateWorkspaceRequestDto workspaceRequestDto,
             @UserId UUID userId
     ) {
-        createWorkspaceUseCase.execute(workspaceRequestDto, userId);
+        createWorkspaceUseCase.execute(file, workspaceRequestDto, userId);
         return CommonResponseDto.created(null);
     }
 
@@ -56,11 +59,12 @@ public class WorkspaceController {
 
     @PatchMapping("/{workspaceId}")
     public CommonResponseDto<?> updateWorkspace(
+            @RequestPart(name = "image") MultipartFile file,
+            @RequestPart(name = "json") UpdateWorkspaceRequestDto workspaceRequestDto,
             @PathVariable Long workspaceId,
-            @RequestBody UpdateWorkspaceRequestDto workspaceRequestDto,
             @UserId UUID userId
     ) {
-        updateWorkspaceUsecase.execute(workspaceId, workspaceRequestDto, userId);
+        updateWorkspaceUseCase.execute(workspaceId, file, workspaceRequestDto, userId);
         return CommonResponseDto.ok(true);
     }
 

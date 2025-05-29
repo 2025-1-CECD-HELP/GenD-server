@@ -44,6 +44,11 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
+    public List<Member> findAllByWorkspaceAndIsSchedule(Workspace workspace, Boolean isSchedule) {
+        return memberJpaRepository.findAllByWorkspaceAndIsSchedule(workspace, true);
+    }
+
+    @Override
     public Member findByUser(User user) {
         return memberJpaRepository.findByUser(user)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));
@@ -60,4 +65,9 @@ public class MemberRepositoryImpl implements MemberRepository {
         memberJpaRepository.delete(member);
     }
 
+
+    @Override
+    public void save(Member member) {
+        memberJpaRepository.save(member);
+    }
 }

@@ -9,6 +9,9 @@ public record ReadWorkspaceResponseDto(
         String workspaceName,
         String workspaceDescription,
         String imageUrl,
-        WorkspaceRole workspaceRole
+        WorkspaceRole workspaceRole,
+        Boolean isPost,
+        Boolean isSchedule,
+        Long rootDirId
 ) {
 }

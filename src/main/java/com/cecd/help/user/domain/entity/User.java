@@ -1,6 +1,7 @@
 package com.cecd.help.user.domain.entity;
 
 
+import com.cecd.help.schedule.domain.entity.Schedule;
 import com.cecd.help.user.domain.type.ELoginProvider;
 import com.cecd.help.user.domain.type.EUserRole;
 import jakarta.persistence.CascadeType;
@@ -43,6 +44,8 @@ public class User {
     @Column(name =  "loginId")
     private String loginId;
 
+    @Column(name = "password")
+    private String password;
 
     @Column(name = "user_role", nullable = false, length = 10)
     @Enumerated(EnumType.STRING)
@@ -61,24 +64,43 @@ public class User {
     @Column(name = "fcm_token")
     private String fcmToken;
 
+    @Column(name = "is_alarm")
+    private Boolean isAlarm;
+
     @Column(name = "email")
     private String email;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Schedule> schedules;
+
+
     //--------------------------------------------------
 
-    @Builder(access = AccessLevel.PRIVATE)
-    public User(String socialId, String nickname, EUserRole userRole, ELoginProvider provider, String fcmToken) {
+    @Builder
+    public User(String socialId, String nickname, String email, EUserRole userRole, String password, ELoginProvider provider, String fcmToken) {
         this.socialId = socialId;
         this.nickname = nickname;
         this.userRole = userRole;
         this.provider = provider;
         this.fcmToken = fcmToken;
+        this.password = password;
         this.profileImageUrl = null;
         this.refreshToken = null;
+        this.email = email;
         this.createdAt = LocalDateTime.now();
+        this.isAlarm = true;
+    }
+
+    public void updateAlarm(Boolean isAlarm) {
+        this.isAlarm = !isAlarm;
+    }
+
+    public void updateFcmToken(String fcmToken) {
+        this.fcmToken = fcmToken;
     }
 
 }

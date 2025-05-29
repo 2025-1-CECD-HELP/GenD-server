@@ -1,5 +1,7 @@
 package com.cecd.help.workspace.application.service.workspace;
 
+import com.cecd.help.document.domain.entity.Directory;
+import com.cecd.help.document.domain.repository.DirectoryRepository;
 import com.cecd.help.user.domain.entity.User;
 import com.cecd.help.user.domain.repository.UserRepository;
 import com.cecd.help.workspace.application.dto.workspace.ReadWorkspaceListResponseDto;
@@ -21,6 +23,7 @@ public class ReadWorkspaceListService implements ReadWorkspaceListUseCase {
     private final UserRepository userRepository;
     private final WorkspaceRepository workspaceRepository;
     private final MemberRepository memberRepository;
+    private final DirectoryRepository directoryRepository;
 
 
     @Override
@@ -41,12 +44,16 @@ public class ReadWorkspaceListService implements ReadWorkspaceListUseCase {
 
     private ReadWorkspaceResponseDto toWorkspaceResponseDto(Member member) {
         var workspace = member.getWorkspace();
-
+        Directory directory = directoryRepository.findByWorkspaceAndParId(workspace, 0L);
         return ReadWorkspaceResponseDto.builder()
                 .workspaceId(workspace.getId())
                 .workspaceName(workspace.getWorkspaceName())
                 .workspaceDescription(workspace.getWorkspaceDescription())
                 .imageUrl(workspace.getWorkspaceImageUrl())
+                .workspaceRole(member.getWorkspaceRole())
+                .rootDirId(directory.getId())
+                .isPost(member.getIsPost())
+                .isSchedule(member.getIsSchedule())
                 .build();
 
     }

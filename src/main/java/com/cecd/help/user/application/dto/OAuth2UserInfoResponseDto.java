@@ -5,11 +5,13 @@ import lombok.Builder;
 
 @Builder(access = AccessLevel.PRIVATE)
 public record OAuth2UserInfoResponseDto(
-        String oAuthId    // 애플 sub, 카카오 id
+        String oAuthId,
+        String email// 애플 sub, 카카오 id
 ) {
-    public static OAuth2UserInfoResponseDto of(String oAuthId) {
+    public static OAuth2UserInfoResponseDto of(String oAuthId, String email) {
         return OAuth2UserInfoResponseDto.builder()
                 .oAuthId(oAuthId)
+                .email(email)
                 .build();
     }
 }

@@ -5,7 +5,6 @@ import java.util.List;
 public record CreateWorkspaceRequestDto(
         String workspaceName,
         String workspaceDescription,
-        String workspaceImageUrl,
         List<InviteEmail> inviteEmailList
 ) {
 }

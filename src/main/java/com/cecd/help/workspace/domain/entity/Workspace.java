@@ -1,5 +1,8 @@
 package com.cecd.help.workspace.domain.entity;
 
+import com.cecd.help.document.domain.entity.Directory;
+import com.cecd.help.post.domain.entity.PostCategory;
+import com.cecd.help.schedule.domain.entity.Schedule;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,6 +47,15 @@ public class Workspace {
     @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL)
     private List<Member> member;
 
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL)
+    private List<PostCategory> postCategories;
+
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL)
+    private List<Schedule> schedules;
+
+    @OneToMany(mappedBy = "workspace", cascade = CascadeType.ALL)
+    private List<Directory> directories;
+
     @Builder
     public Workspace(String workspaceName, String workspaceDescription, String workspaceImageUrl, LocalDateTime createAt) {
         this.workspaceName = workspaceName;
@@ -53,9 +65,13 @@ public class Workspace {
 
     }
 
-    public void updateWorkspace(String workspaceName, String workspaceDescription, String workspaceImageUrl) {
+    public void updateImageWorkspace(String workspaceName, String workspaceDescription, String workspaceImageUrl) {
         this.workspaceName = workspaceName;
         this.workspaceDescription = workspaceDescription;
         this.workspaceImageUrl = workspaceImageUrl;
+    }
+    public void updateWorkspace(String workspaceName, String workspaceDescription) {
+        this.workspaceName = workspaceName;
+        this.workspaceDescription = workspaceDescription;
     }
 }

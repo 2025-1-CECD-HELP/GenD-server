@@ -5,5 +5,5 @@ import java.util.UUID;
 
 @UseCase
 public interface DeleteMemberUseCase {
-    void execute(UUID userId, Long memberId);
+    void execute(UUID userId, Long memberId, Long workspaceId);
 }

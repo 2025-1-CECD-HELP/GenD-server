@@ -26,6 +26,7 @@ public enum ErrorCode {
     NOT_MATCH_PLOGGING_IMAGE_LABEL("40013", HttpStatus.BAD_REQUEST, "플로깅 이미지와 라벨의 개수가 일치하지 않습니다."),
     INVALID_LABEL_TYPE("40014", HttpStatus.BAD_REQUEST, "잘못된 라벨 타입입니다."),
     NOT_FOUND_MISSION("40015", HttpStatus.BAD_REQUEST, "해당 미션을 찾을 수 없습니다."),
+    NOT_FOUND_EMAIL("40015", HttpStatus.BAD_REQUEST, "이메일 없다고 이자식아 !"),
 
     /**
      * 401** Unauthorized
@@ -56,7 +57,7 @@ public enum ErrorCode {
     NOT_FOUND_MEMBER("40403", HttpStatus.NOT_FOUND, "해당 팀 멤버가 존재하지 않습니다."),
     NOT_FOUND_REPORT("40404", HttpStatus.NOT_FOUND, "해당 신고가 존재하지 않습니다."),
     NOT_FOUND_MATCH("40405", HttpStatus.NOT_FOUND, "매칭을 찾을 수 없습니다."),
-
+    NOT_FOUND_AUTHORIZATION_HEADER("40406", HttpStatus.NOT_FOUND, "인증 헤더 없음"),
     /**
      * 405** Method Not Allowed
      */
@@ -73,8 +74,10 @@ public enum ErrorCode {
     /**
      * 500** Server Error
      */
-    SERVER_ERROR("50000", HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다.");
-
+    SERVER_ERROR("50000", HttpStatus.INTERNAL_SERVER_ERROR, "서버 내부 오류입니다."),
+    FILE_CONVERT_ERROR("50001", HttpStatus.INTERNAL_SERVER_ERROR , "파일 업로드 실패"),
+    FILE_UPLOAD_ERROR("50002", HttpStatus.INTERNAL_SERVER_ERROR , "파일 업로드 실패" ),
+    EXTERNAL_SERVER_ERROR("50003", HttpStatus.INTERNAL_SERVER_ERROR, "외부 에러");
     private final String code;
     private final HttpStatus httpStatus;
     private final String message;

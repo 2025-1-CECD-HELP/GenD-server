@@ -58,3 +58,12 @@ dependencies {
 tasks.named('test') {
 	useJUnitPlatform()
 }
+
+
+jar {
+	enabled = false
+}
+
+bootJar {
+	archiveFileName = 'gend-0.0.1-SNAPSHOT.jar'
+}
