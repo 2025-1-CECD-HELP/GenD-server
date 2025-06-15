@@ -42,6 +42,7 @@ public class LoginByKakaoService implements LoginByKakaoUseCase {
                                     .userRole(EUserRole.USER)
                                     .nickname(userInfo.get("nickname"))
                                     .email(userInfo.get("email"))
+                                    .loginId(userInfo.get("email"))
                                     .fcmToken(fcmTokenRequestDto.fcmToken())
                                     .password(bCryptPasswordEncoder.encode(PasswordUtil.generateRandomPassword()))
                                     .build()
@@ -55,6 +56,7 @@ public class LoginByKakaoService implements LoginByKakaoUseCase {
         );
 
         userRepository.updateRefreshToken(userSecurityForm.getId(), jwtTokenDto.refreshToken());
+        userRepository.updateFcmToken(userSecurityForm.getId(), fcmTokenRequestDto.fcmToken());
 
         return jwtTokenDto;
     }

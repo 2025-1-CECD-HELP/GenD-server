@@ -5,11 +5,16 @@ import com.cecd.help.core.constant.Constants;
 import com.cecd.help.core.exception.CustomException;
 import com.cecd.help.core.exception.ErrorCode;
 import com.cecd.help.core.util.HeaderUtil;
+import com.cecd.help.user.application.usecase.CreateLoginUseCase;
+import com.cecd.help.user.application.usecase.ReadLoginUserUsecase;
 import com.cecd.help.user.application.usecase.oauth.GetTokenByKakaoUseCase;
 import com.cecd.help.user.application.usecase.oauth.LoginByKakaoUseCase;
 import com.cecd.help.user.application.usecase.oauth.RedirectToKakaoLoginUseCase;
 import com.cecd.help.user.infrastructure.apple.AuthLoginService;
 import com.cecd.help.user.presentation.request.FcmTokenRequestDto;
+import com.cecd.help.user.presentation.request.LoginUserRegisterRequestDto;
+import com.cecd.help.user.presentation.request.LoginUserRequestDto;
+import com.google.api.services.storage.Storage.Projects.HmacKeys.Create;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.constraints.NotNull;
@@ -29,10 +34,26 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RequestMapping("/oauth")
 public class OAuthController {
+    private final CreateLoginUseCase createLoginUseCase;
+    private final ReadLoginUserUsecase readLoginUserUsecase;
     private final LoginByKakaoUseCase loginByKakaoUseCase;
     private final RedirectToKakaoLoginUseCase redirectToKakaoLoginUseCase;
     private final GetTokenByKakaoUseCase getTokenByKakaoUseCase;
     private final AuthLoginService authLoginService;
+
+    @PostMapping("/login/email")
+    public CommonResponseDto<?> loginByEmail(
+            @RequestBody LoginUserRequestDto loginUserRequestDto
+    ) {
+        return CommonResponseDto.ok(readLoginUserUsecase.execute(loginUserRequestDto));
+    }
+
+    @PostMapping("/login/email/register")
+    public CommonResponseDto<?> loginByEmailRegister(
+            @RequestBody LoginUserRegisterRequestDto loginUserRegisterRequestDto
+    ) {
+        return CommonResponseDto.ok(createLoginUseCase.execute(loginUserRegisterRequestDto));
+    }
 
     @PostMapping("/login/kakao")
     public CommonResponseDto<?> loginByKakao(

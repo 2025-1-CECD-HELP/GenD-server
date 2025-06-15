@@ -30,6 +30,10 @@ public interface UserJpaRepository extends JpaRepository<User, UUID> {
     @Query("update User u set u.refreshToken = :refreshToken where u.id = :id")
     void updateRefreshToken(UUID id, String refreshToken);
 
+    @Modifying(clearAutomatically = true)
+    @Query("update User u set u.fcmToken = :fcmToken where u.id = :id")
+    void updateFcmToken(UUID id, String fcmToken);
+
     Optional<User> findBySocialId(String socialId);
 
 

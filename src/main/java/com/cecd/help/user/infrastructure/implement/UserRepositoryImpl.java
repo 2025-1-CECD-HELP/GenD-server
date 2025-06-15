@@ -35,6 +35,11 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
+    public void delete(User user) {
+        userJpaRepository.delete(user);
+    }
+
+    @Override
     public Optional<UserSecurityForm> findFormById(UUID id) {
         return userJpaRepository.findFormById(id);
     }
@@ -52,6 +57,11 @@ public class UserRepositoryImpl implements UserRepository {
     @Override
     public void updateRefreshToken(UUID id, String refreshToken) {
         userJpaRepository.updateRefreshToken(id, refreshToken);
+    }
+
+    @Override
+    public void updateFcmToken(UUID id, String fcmToken) {
+        userJpaRepository.updateFcmToken(id, fcmToken);
     }
 
     @Override

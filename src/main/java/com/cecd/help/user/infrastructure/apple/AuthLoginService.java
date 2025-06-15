@@ -55,6 +55,7 @@ public class AuthLoginService {
                         .password(PasswordUtil.generateRandomPassword())
                         .fcmToken(fcmToken)
                         .email(OAuth2UserInfo.email())
+                        .loginId(OAuth2UserInfo.email())
                         .build()
 
         );

@@ -25,5 +25,7 @@ public interface MemberJpaRepository extends JpaRepository<Member, Long> {
 
     List<Member> findAllByWorkspaceAndIsSchedule(Workspace workspace, Boolean isSchedule);
 
+    List<Member> findAllByWorkspaceAndIsPost(Workspace workspace, Boolean isPost);
+
     Optional<Member> findByUser(User user);
 }

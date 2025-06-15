@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface PostCategoryRepository {
-    PostCategory findByCategoryName(String categoryName);
+    PostCategory findByCategoryNameAndWorkspace(String categoryName, Workspace workspace);
     Boolean existsByCategoryNameAndWorkspace(String categoryName, Workspace workspace);
     void save(PostCategory category);
 

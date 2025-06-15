@@ -7,7 +7,7 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface PostCategoryJpaRepository extends JpaRepository<PostCategory, Long> {
-    Optional<PostCategory> findByCategoryName(String categoryName);
+    Optional<PostCategory> findByCategoryNameAndWorkspace(String categoryName, Workspace workspace);
     Boolean existsByCategoryNameAndWorkspace(String categoryName, Workspace workspace);
     List<PostCategory> findByWorkspace(Workspace workspace);
 }

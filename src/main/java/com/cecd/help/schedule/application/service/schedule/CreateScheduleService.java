@@ -12,9 +12,10 @@ import com.cecd.help.workspace.domain.entity.Workspace;
 import com.cecd.help.workspace.domain.repository.WorkspaceRepository;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -30,6 +31,8 @@ public class CreateScheduleService implements CreateScheduleUseCase {
         User user = userRepository.findById(userId);
         Workspace workspace = workspaceRepository.findById(workspaceId);
 
+        log.info(createScheduleRequestDto.startSchedule().toString());
+
         Schedule newSchedule = scheduleMapper.toEntity(
                 createScheduleRequestDto.scheduleTitle(),
                 createScheduleRequestDto.isAlarm(),
@@ -43,8 +46,8 @@ public class CreateScheduleService implements CreateScheduleUseCase {
         );
         scheduleRepository.save(newSchedule);
 
-
-        dynamicTaskScheduler.scheduleSingleUserTask(workspace, newSchedule);
+        if(createScheduleRequestDto.isAlarm())
+            dynamicTaskScheduler.scheduleSingleUserTask(workspace, newSchedule);
         return true;
     }
 }

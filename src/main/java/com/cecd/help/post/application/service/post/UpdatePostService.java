@@ -32,7 +32,7 @@ public class UpdatePostService implements UpdatePostUseCase {
     @Override
     public Boolean execute(Long postId, CreatePostRequestDto createPostRequestDto, MultipartFile multipartFile) {
         Post post = postRepository.findById(postId);
-        PostCategory category = categoryRepository.findByCategoryName(createPostRequestDto.postCategory());
+        PostCategory category = categoryRepository.findByCategoryNameAndWorkspace(createPostRequestDto.postCategory(), post.getWorkspace());
 
         if(!multipartFile.isEmpty()) {
             String url = s3Util.upload(multipartFile);

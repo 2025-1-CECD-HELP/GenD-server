@@ -16,8 +16,8 @@ public class PostCategoryRepositoryImpl implements PostCategoryRepository {
     private final PostCategoryJpaRepository postCategoryJpaRepository;
 
     @Override
-    public PostCategory findByCategoryName(String categoryName) {
-        return postCategoryJpaRepository.findByCategoryName(categoryName)
+    public PostCategory findByCategoryNameAndWorkspace(String categoryName, Workspace workspace) {
+        return postCategoryJpaRepository.findByCategoryNameAndWorkspace(categoryName, workspace)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER)); // 카테고리 없음
     }
 

@@ -10,9 +10,11 @@ import com.cecd.help.workspace.domain.repository.WorkspaceRepository;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
@@ -40,6 +42,12 @@ public class ReadScheduleService implements ReadScheduleUseCase {
                         .type(schedule1.getType())
                         .build()
         ).toList();
+
+        scheduleResponseDtos.forEach(mk ->
+                log.info("tlqkffusdk {} dsaf asd {} asdf asdf {}",
+                        mk.startSchedule(), mk.endSchedule(), mk.startAlarm())
+        );
+
 
         return ReadScheduleListResponseDto.builder()
                 .scheduleList(scheduleResponseDtos)

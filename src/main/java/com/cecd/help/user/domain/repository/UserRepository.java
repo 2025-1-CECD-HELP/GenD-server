@@ -13,10 +13,10 @@ public interface UserRepository {
     User findById(UUID id);
     User save(User user);
     User findBySocialId(String socialId);
-
+    void delete(User user);
     Optional<UserSecurityForm> findFormById(UUID id);
     Optional<UserSecurityForm> findFormByIdAndRefreshToken(UUID id, String refreshToken);
     Optional<UserSecurityForm> findFormBySerialIdAndProvider(String serialId, ELoginProvider provider);
     void updateRefreshToken(UUID id, String refreshToken);
-
+    void updateFcmToken(UUID id, String fcmToken);
 }

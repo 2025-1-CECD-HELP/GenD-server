@@ -1,7 +1,10 @@
 package com.cecd.help.workspace.domain.entity;
 
+import com.cecd.help.post.domain.entity.Post;
+import com.cecd.help.schedule.domain.entity.Schedule;
 import com.cecd.help.user.domain.entity.User;
 import com.cecd.help.workspace.domain.type.WorkspaceRole;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -12,7 +15,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.List;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -48,6 +53,9 @@ public class Member {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(nullable = false, name = "workspace_id")
     private Workspace workspace;
+
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private List<Post> posts;
 
     //------------------------------------------------
 

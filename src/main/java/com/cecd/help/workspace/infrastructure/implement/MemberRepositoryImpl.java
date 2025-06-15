@@ -49,6 +49,11 @@ public class MemberRepositoryImpl implements MemberRepository {
     }
 
     @Override
+    public List<Member> findAllByWorkspaceAndIsPost(Workspace workspace, Boolean isPost) {
+        return memberJpaRepository.findAllByWorkspaceAndIsPost(workspace, true);
+    }
+
+    @Override
     public Member findByUser(User user) {
         return memberJpaRepository.findByUser(user)
                 .orElseThrow(() -> new CustomException(ErrorCode.NOT_FOUND_USER));

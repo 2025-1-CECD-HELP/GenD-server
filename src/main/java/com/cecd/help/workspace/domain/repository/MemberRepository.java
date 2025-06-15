@@ -21,6 +21,8 @@ public interface MemberRepository {
 
     List<Member> findAllByWorkspaceAndIsSchedule(Workspace workspace, Boolean isSchedule);
 
+    List<Member> findAllByWorkspaceAndIsPost(Workspace workspace, Boolean isPost);
+
     Member findByUser(User user);
 
     Member findById(Long id);

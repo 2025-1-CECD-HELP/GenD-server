@@ -6,7 +6,10 @@ import com.cecd.help.workspace.domain.entity.Member;
 import com.cecd.help.workspace.domain.entity.Workspace;
 import com.cecd.help.workspace.domain.repository.MemberRepository;
 import java.time.Duration;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -38,7 +41,8 @@ public class DynamicTaskScheduler {
         List<Member> members = memberRepository.findAllByWorkspaceAndIsSchedule(workspace, true);
 
         // 2, 딜레이 계산하기
-        long delay = calculateDelay(LocalTime.from(schedule.getStartAlarm().plusHours(-9L)));
+        long delay = calculateDelay(schedule.getStartAlarm().toLocalTime());
+
         String title = schedule.getType().toString();
         Long workspaceId = workspace.getId();
         // 3.
@@ -62,7 +66,13 @@ public class DynamicTaskScheduler {
     }
 
     private long calculateDelay(LocalTime attendanceTime) {
-        long delay = Duration.between(LocalTime.now(), attendanceTime).toMillis();
+        ZonedDateTime nowSeoul = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
+        // 목표 시간을 오늘 날짜에 결합
+        long delay = Duration.between(nowSeoul.toLocalTime(), attendanceTime).toMillis();
+
+        log.info("계산된 지연시간: {} ms, 현재시간: {}, 목표시간: {}",
+                delay, nowSeoul.toLocalTime(), attendanceTime);
+
         return delay >= 0 ? delay : TimeUnit.DAYS.toMillis(1) + delay; // 다음 날로 예약
     }
 

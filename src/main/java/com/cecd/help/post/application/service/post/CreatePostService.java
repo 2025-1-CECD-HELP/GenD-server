@@ -1,5 +1,6 @@
 package com.cecd.help.post.application.service.post;
 
+import com.cecd.help.core.util.FcmUtil;
 import com.cecd.help.core.util.S3Util;
 import com.cecd.help.post.application.mapper.PostMapper;
 import com.cecd.help.post.application.usecase.post.CreatePostUseCase;
@@ -14,6 +15,7 @@ import com.cecd.help.workspace.domain.entity.Member;
 import com.cecd.help.workspace.domain.entity.Workspace;
 import com.cecd.help.workspace.domain.repository.MemberRepository;
 import com.cecd.help.workspace.domain.repository.WorkspaceRepository;
+import java.util.List;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,7 @@ public class CreatePostService implements CreatePostUseCase {
     private final UserRepository userRepository;
     private final PostMapper postMapper;
     private final PostCategoryRepository postCategoryRepository;
+    private final FcmUtil fcmUtil;
 
     @Override
     public Boolean execute(CreatePostRequestDto createPostRequestDto, MultipartFile multipartFile, UUID userId, Long workspaceId) {
@@ -41,7 +44,7 @@ public class CreatePostService implements CreatePostUseCase {
 
         Member member = memberRepository.findByUserAndWorkspace(user, workspace);
 
-        PostCategory postCategory = postCategoryRepository.findByCategoryName(createPostRequestDto.postCategory());
+        PostCategory postCategory = postCategoryRepository.findByCategoryNameAndWorkspace(createPostRequestDto.postCategory(), workspace);
         System.out.print(postCategory.getCategoryName());
         Post newPost = postMapper.newPost(
                 createPostRequestDto.postTitle(),
@@ -53,6 +56,16 @@ public class CreatePostService implements CreatePostUseCase {
         );
 
         postRepository.save(newPost);
+
+        List<Member> members = memberRepository.findAllByWorkspaceAndIsSchedule(workspace, true);
+
+        members.forEach(sendmember -> fcmUtil.sendMessage(
+                "게시글 알림",
+                workspace.getWorkspaceName() + "워크스페이스에서 게시글이 올라왔습니다.",
+                sendmember.getUser().getFcmToken(),
+                workspace.getId()
+                ));
+
         return true;
     }
 }
